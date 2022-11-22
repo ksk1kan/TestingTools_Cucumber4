@@ -1,0 +1,51 @@
+https://www.jetbrains.com/help/idea/maven-support.html#create_new_maven_project
+https://www.jetbrains.com/help/idea/cucumber-support.html
+
+
+
+********************** MAVEN ICIN KURULUM (CUCUMBER ICIN) **********************
+
+1 -> Yeni Project -> Project type "MAVEN" -> OKAY
+--------------------------------------------------------------------------------------
+2 -> Klasör yapısı incelendi.
+  main : Developer'ın source kodları yer alıyor.
+  test : Testerların kendi kodları yer alıyor.
+--------------------------------------------------------------------------------------
+3 -> Mavenın verdiği düzenli yapının kendi tarafımızda ,
+     bizde kendi düzenli klasör yapımızı oluşturacağız.
+--------------------------------------------------------------------------------------
+* Klasörler *
+--------------
+FeatureFiles   -> Senaryolarımızın olduğu klasör
+StepDefinitions-> Senaryoların çalışan adımları - metodları burada olacak
+Pages          -> Page Object Modell sayfalarımız POM (@FindBy)
+Utilities      -> Driver ve diğer tekrar kullanılacak metodlarımız
+Runners        -> Çalıştırıcılar
+--------------------------------------------------------------------------------------
+4 -> Ayarlar
+    A) IntelliJ Editör ayarları
+        2 tane plug-in eklenecek
+            1. Cucumber for Java
+            2. Gherkin Language
+--------------------------------------------------------------------------------------
+5 ->A) https://cucumber.io/docs/gherkin/reference/#keywords
+        Feature
+        Scenario
+        Given-When-And-Then
+
+        Examples follow this same pattern:
+        Describe an initial context (Given steps)
+        Describe an event (When steps)
+        Describe an exoected outcome (Then steps)
+
+    B) POM.xml --> Project Object Model Ayarları
+
+        Selenium
+        Cucumber
+        TestNG
+        Cucumber - TestNG birleştiren library
+        Webdriver   WebDriverManager   //5.1.0
+        Properties de BytCode version (1.8) ayar
+
+        https://cucumber.io/docs/installation/java/
+                     <scope>test</scope>
