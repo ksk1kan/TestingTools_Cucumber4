@@ -1,11 +1,11 @@
 package Pages;
 
 import Utilities.GWD;
-import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 
@@ -46,8 +46,8 @@ public class Parent {
 
     public void verifyContainsTextFunction(WebElement element, String value)
     {
-        waitUntilVisible(element); //elementler gözükene kadar bekle
-        Assert.assertTrue("The text you searched could'nt be find!!", element.getText().toLowerCase().contains(value.toLowerCase()));
+        wait.until(ExpectedConditions.textToBePresentInElement(element, value));
+        Assert.assertTrue(element.getText().toLowerCase().contains(value.toLowerCase()),"The text you searched could'nt be find");
     }
 
 
