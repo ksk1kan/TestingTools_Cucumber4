@@ -4,6 +4,7 @@ import Utilities.GWD;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class DialogContent extends Parent{
     public DialogContent() {
@@ -47,6 +48,22 @@ public class DialogContent extends Parent{
     @FindBy(xpath = "//div[contains(text(),'already exists')]")
     private WebElement alreadyExist;
 
+    @FindBy(xpath = "(//input[@id='ms-text-field-0'])[1]")
+    private WebElement searchInput;
+
+    @FindBy(xpath = "//ms-search-button//button")
+    private WebElement searchButton;
+
+    @FindBy(xpath = "(//button[@color='warn'])[1]")
+    private WebElement deleteButton;
+
+    @FindBy(xpath = "//span[text()=' Delete ']")
+    private WebElement deleteDialogBtn;
+
+    @FindBy(xpath = "(//td[@role='cell'])[2]")
+    private WebElement searchResultCell;
+
+
     WebElement myElement;
     public void findAndSend(String strlement, String value)
     {
@@ -58,6 +75,7 @@ public class DialogContent extends Parent{
             case "nameInput" : myElement=nameInput;break;
             case "codeInput" : myElement=codeInput;break;
             case "shortName" : myElement=shortName;break;
+            case "searchInput" : myElement=searchInput;break;
         }
         sendKeysFunction(myElement, value);
     }
@@ -71,6 +89,9 @@ public class DialogContent extends Parent{
             case "addButton" : myElement=addButton;break;
             case "saveButton" : myElement=saveButton;break;
             case "acceptCookies" : myElement=acceptCookies;break;
+            case "searchButton" : myElement=searchButton;break;
+            case "deleteButton" : myElement=deleteButton;break;
+            case "deleteDialogBtn" : myElement=deleteDialogBtn;break;
         }
         clickFunction(myElement);
     }
@@ -83,8 +104,24 @@ public class DialogContent extends Parent{
             case "txtTechnoStudy" : myElement=txtTechnoStudy;break;
             case "successMessage" : myElement=successMessage;break;
             case "alreadyExist" : myElement=alreadyExist;break;
+            case "searchResultCell" : myElement=searchResultCell;break;
         }
         verifyContainsTextFunction(myElement, text);
+    }
+
+    public void findAndDelete(String searchText)
+    {
+        // kelimeyi ara ve sonra sil
+        findAndSend("searchInput",searchText); // aranan kelime kutucuğa gönderildi.
+        findAndClick("searchButton"); // search butonuna basıldı
+
+        // wait.until(ExpectedConditions.stalenessOf(deleteButton)); --> STALE ZAMANI YAKALANAMADI.
+        findAndContainsText("searchResultCell",searchText); // arama sonuç satırında o kelime geçiyor mu diye bekliyor, onaylıyor.
+
+
+        findAndClick("deleteButton");
+        findAndClick("deleteDialogBtn");
+
     }
 
 
