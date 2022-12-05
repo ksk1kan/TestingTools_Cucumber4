@@ -8,13 +8,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class DialogContent extends Parent{
     public DialogContent() {
-        PageFactory.initElements(GWD.getDriver(),this);
+        PageFactory.initElements(GWD.getDriver(), this);
     }
 
-    @FindBy(css="input[formcontrolname='username']")
+    @FindBy(css = "input[formcontrolname='username']")
     private WebElement username;
 
-    @FindBy(css="input[formcontrolname='password']")
+    @FindBy(css = "input[formcontrolname='password']")
     private WebElement password;
 
     @FindBy(css = "button[aria-label='LOGIN']")
@@ -39,7 +39,7 @@ public class DialogContent extends Parent{
     @FindBy(xpath = "//div[contains(text(),'successfully')]")
     private WebElement successMessage;
 
-    @FindBy(css="button[class='consent-give']")
+    @FindBy(css = "button[class='consent-give']")
     private WebElement acceptCookies;
 
     @FindBy(xpath = "//ms-text-field[@formcontrolname='shortName']//input")
@@ -48,13 +48,13 @@ public class DialogContent extends Parent{
     @FindBy(xpath = "//div[contains(text(),'already exists')]")
     private WebElement alreadyExist;
 
-    @FindBy(xpath = "(//input[@id='ms-text-field-0'])[1]")
+    @FindBy(xpath = "//mat-form-field//input[@data-placeholder='Name']")
     private WebElement searchInput;
 
     @FindBy(xpath = "//ms-search-button//button")
     private WebElement searchButton;
 
-    @FindBy(xpath = "(//button[@color='warn'])[1]")
+    @FindBy(xpath = "(//ms-delete-button//button)[1]")
     private WebElement deleteButton;
 
     @FindBy(xpath = "//span[text()=' Delete ']")
@@ -63,64 +63,117 @@ public class DialogContent extends Parent{
     @FindBy(xpath = "(//td[@role='cell'])[2]")
     private WebElement searchResultCell;
 
+    @FindBy(xpath = "//ms-text-field[@formcontrolname='budgetAccountIntegrationCode']//input")
+    private WebElement integrationCode;
+
+    @FindBy(xpath = "//ms-integer-field[@formcontrolname='priority']/input")
+    private WebElement priorityCode;
+
+    @FindBy(xpath = "//mat-slide-toggle[@formcontrolname='active']")
+    private WebElement toggleBar;
+
 
     WebElement myElement;
-    public void findAndSend(String strlement, String value)
-    {
-        //ELEMENT GET !!
-        switch (strlement)
-        {
-            case "username" : myElement=username;break;
-            case "password" : myElement=password;break;
-            case "nameInput" : myElement=nameInput;break;
-            case "codeInput" : myElement=codeInput;break;
-            case "shortName" : myElement=shortName;break;
-            case "searchInput" : myElement=searchInput;break;
+
+    public void findAndSend(String strlement, String value) {
+        //element get :burda string isimden weblemente ulaşıcam
+        switch (strlement) {
+            case "username":
+                myElement = username;
+                break;
+            case "password":
+                myElement = password;
+                break;
+            case "nameInput":
+                myElement = nameInput;
+                break;
+            case "codeInput":
+                myElement = codeInput;
+                break;
+            case "shortName":
+                myElement = shortName;
+                break;
+            case "searchInput":
+                myElement = searchInput;
+                break;
+            case "integrationCode":
+                myElement = integrationCode;
+                break;
+            case "priorityCode":
+                myElement = priorityCode;
+                break;
         }
+
         sendKeysFunction(myElement, value);
     }
 
-    public void findAndClick(String strlement)
-    {
-        //ELEMENT GET !!
-        switch (strlement)
-        {
-            case "loginButton" : myElement=loginButton;break;
-            case "addButton" : myElement=addButton;break;
-            case "saveButton" : myElement=saveButton;break;
-            case "acceptCookies" : myElement=acceptCookies;break;
-            case "searchButton" : myElement=searchButton;break;
-            case "deleteButton" : myElement=deleteButton;break;
-            case "deleteDialogBtn" : myElement=deleteDialogBtn;break;
+    public void findAndClick(String strlement) {
+        //element get :burda string isimden weblemente ulaşıcam
+        switch (strlement) {
+            case "loginButton":
+                myElement = loginButton;
+                break;
+            case "addButton":
+                myElement = addButton;
+                break;
+            case "saveButton":
+                myElement = saveButton;
+                break;
+            case "acceptCookies":
+                myElement = acceptCookies;
+                break;
+            case "searchButton":
+                myElement = searchButton;
+                break;
+            case "deleteButton":
+                myElement = deleteButton;
+                break;
+            case "deleteDialogBtn":
+                myElement = deleteDialogBtn;
+                break;
+            case "toggleBar":
+                myElement = toggleBar;
+                break;
         }
+
         clickFunction(myElement);
     }
 
-    public void findAndContainsText(String strlement, String text)
-    {
-        //ELEMENT GET !!
-        switch (strlement)
-        {
-            case "txtTechnoStudy" : myElement=txtTechnoStudy;break;
-            case "successMessage" : myElement=successMessage;break;
-            case "alreadyExist" : myElement=alreadyExist;break;
-            case "searchResultCell" : myElement=searchResultCell;break;
+    public void findAndContainsText(String strlement, String text) {
+        //element get :burda string isimden weblemente ulaşıcam
+        switch (strlement) {
+            case "txtTechnoStudy":
+                myElement = txtTechnoStudy;
+                break;
+            case "successMessage":
+                myElement = successMessage;
+                break;
+            case "alreadyExist":
+                myElement = alreadyExist;
+                break;
+            case "searchResultCell":
+                myElement = searchResultCell;
+                break;
+
         }
+
         verifyContainsTextFunction(myElement, text);
     }
 
-    public void findAndDelete(String searchText)
-    {
-        // kelimeyi ara ve sonra sil
-        findAndSend("searchInput",searchText); // aranan kelime kutucuğa gönderildi.
-        findAndClick("searchButton"); // search butonuna basıldı
+    public void findAndDelete(String searchText) {
 
-        // wait.until(ExpectedConditions.stalenessOf(deleteButton)); --> STALE ZAMANI YAKALANAMADI.
-        findAndContainsText("searchResultCell",searchText); // arama sonuç satırında o kelime geçiyor mu diye bekliyor, onaylıyor.
+        findAndSend("searchInput", searchText);  // aranacak kelimeyi kutucuğa gönder
+        findAndClick("searchButton"); // arama butonuna bas
 
+        //wait.until(ExpectedConditions.stalenessOf(deleteButton)); stale zamanını yakalayamadım
+        //wait.until(ExpectedConditions.numberOfElementsToBeLessThan(By.xpath("//tbody[@role='rowgroup']//tr"),5));
 
-        findAndClick("deleteButton");
-        findAndClick("deleteDialogBtn");
+        // findAndContainsText("searchResultCell", searchText); // arama sonuçlarının ilkinde aranan kelime gözükene kadar bekle.
+
+        waitUntilLoading(); // progressbar ın çocukları 0 olana kadar bekle
+
+        findAndClick("deleteButton"); // silme butonua bas, çöp kutusu
+        findAndClick("deleteDialogBtn"); // dilogdaki silme butonuna bas
 
     }
 

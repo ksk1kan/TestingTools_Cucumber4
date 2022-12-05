@@ -6,6 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,8 +18,12 @@ public class GWD {
 
     public static WebDriver getDriver()
     {
+        // extend report türkçe bilg çalışmaması sebebiyle kondu
+        Locale.setDefault(new Locale("EN"));
+        System.setProperty("user.language", "EN");
 
         if (driver == null) { // 1 kere başlat
+            //driverı start et doldur, başlat ve gönder
 
             Logger.getLogger("").setLevel(Level.SEVERE);
             System.setProperty(org.slf4j.simple.SimpleLogger.DEFAULT_LOG_LEVEL_KEY, "Error");
@@ -27,28 +32,27 @@ public class GWD {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
 
-            //  WebDriverManager.firefoxdriver().setup();
-            //  driver = new FirefoxDriver();
-
-            //  WebDriverManager.operadriver().setup();
-            //  driver = new OperaDriver();
+            // firefox
+//        WebDriverManager.firefoxdriver().setup();
+//        driver = new FirefoxDriver();
         }
+
 
         return driver;
     }
 
     public static void quitDriver()
     {
-        try{
+        try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        if(driver != null)  // dolu ise
+        if (driver != null)  // dolu ise
         {
             driver.quit();
-            driver = null;
+            driver =null;
         }
     }
 

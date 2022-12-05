@@ -5,6 +5,7 @@ Feature: Datatable Functionality
     When Enter username and password and click login button
     Then User should be login succesfuly
 
+    @SmokeTest
     Scenario: Create Country
       And Click on the element in left nav
         | setupOne   |
